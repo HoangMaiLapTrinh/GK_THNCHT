@@ -1,0 +1,18 @@
+const requestLoggingMiddleware = (req, res, next) => {
+    const { method, originalUrl, headers, query, ip } = req;
+    const body = req.body && typeof req.body === 'object' ? req.body : {};
+
+    const message = {
+        method,
+        url: originalUrl,
+        ip,
+        headers,
+        query,
+        body: Object.keys(body).length > 0 ? body : "No body"
+    };
+
+    console.log(message);
+    next();
+};
+
+module.exports = requestLoggingMiddleware;
